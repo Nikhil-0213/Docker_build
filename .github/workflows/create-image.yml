@@ -1,0 +1,29 @@
+name: python flask image
+
+on:
+  push:
+    branches:
+      - main
+  pull_requests:
+    branches:
+      - main
+
+jobs:
+  docker_build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: lgon to the docker hub account
+      uses: docker login -u nikhil837408 -p Nikhil@0213
+
+    - name: build image
+      uses: docker build -t nikhil/github-actions-image:latest .
+
+    - name: push docker image
+      uses: docker push nikhil/github-actions-image:latest
+
+    - name: docker logout
+      uses: docker logout
